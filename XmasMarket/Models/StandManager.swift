@@ -15,7 +15,7 @@ class StandManager: ObservableObject {
     @Published var errorMessage: String?
 
     private let cacheFileName = "stands.json"
-    private let apiURL = URL(string: "http://localhost:8000/api/stands")!
+    private let apiURL = URL(string: "http://217.154.167.109:8000/api/stands")!
 
     init() {
         loadFromCache()
