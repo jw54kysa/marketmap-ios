@@ -45,4 +45,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             break
         }
     }
+    
+    func startUpdating() {
+        manager.startUpdatingLocation()
+    }
+
 }

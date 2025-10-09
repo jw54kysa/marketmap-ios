@@ -15,7 +15,7 @@ class StandManager: ObservableObject {
     @Published var errorMessage: String?
 
     private let cacheFileName = "stands.json"
-    private let apiURL = URL(string: "http://217.154.167.109:8000/api/stands")!
+    private let apiURL = URL(string: "http://marketmap-app.de:8000/api/stands")!
 
     init() {
         loadFromCache()
@@ -65,13 +65,14 @@ class StandManager: ObservableObject {
         errorMessage = nil
 
         URLSession.shared.dataTask(with: apiURL) { data, response, error in
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.isLoading = false
             }
 
             if let error = error {
                 DispatchQueue.main.async {
                     self.errorMessage = "Network error: \(error.localizedDescription)"
+                    print("📉❌ fetched network error")
                 }
                 return
             }
@@ -79,6 +80,7 @@ class StandManager: ObservableObject {
             guard let data = data else {
                 DispatchQueue.main.async {
                     self.errorMessage = "No data received"
+                    print("📉❌ fetched no data")
                 }
                 return
             }
@@ -92,7 +94,9 @@ class StandManager: ObservableObject {
                 self.saveToCache(decoded)
             } catch {
                 DispatchQueue.main.async {
+                    print(data)
                     self.errorMessage = "Decoding error: \(error.localizedDescription)"
+                    print("📉❌ fetched decodeing error")
                 }
             }
         }.resume()

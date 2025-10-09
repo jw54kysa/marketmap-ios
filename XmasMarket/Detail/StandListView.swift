@@ -14,7 +14,7 @@ struct StandListView: View {
     var body: some View {
         NavigationView {
             if standManager.isLoading {
-                ProgressView("Loading...")
+                
             } else if let error = standManager.errorMessage {
                 Text("Error: \(error)").foregroundColor(.red)
             } else {

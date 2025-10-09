@@ -7,7 +7,6 @@
 import SwiftUI
 import MapKit
 
-
 struct MapView: View {
     
     @StateObject var locationManager = LocationManager()
@@ -105,6 +104,10 @@ struct MapView: View {
                         
                     }
                     .padding()
+                }
+                
+                if standManager.isLoading {
+                    SnowfallLoadingOverlay()
                 }
             }
             //.navigationTitle("MarketMap")
