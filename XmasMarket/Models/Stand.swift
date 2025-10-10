@@ -40,3 +40,16 @@ struct Stand: Codable, Identifiable, Equatable {
         return BoothType(rawValue: type)
     }
 }
+
+let defaultStand = Stand(
+    id: 0,
+    name: "Default Leipzig Stand",
+    icon: "🍷",
+    type: "wine",
+    info: "This is a default stand located in the middle of Leipzig.",
+    offers: [Offer(id: 0, name: "Wein", price: 5.5), Offer(id: 1, name: "Rotwein", price: 6.5)],
+    open_time: "12:00",
+    close_time: "22:00",
+    lat: 51.3397,  // Leipzig latitude
+    lng: 12.3731   // Leipzig longitude
+)

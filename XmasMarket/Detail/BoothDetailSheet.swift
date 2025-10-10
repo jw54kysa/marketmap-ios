@@ -26,13 +26,27 @@ struct BoothDetailSheet: View {
                     
                     Divider()
                     
-                    // Extra info (example)
+                    // Extra info
                     VStack(alignment: .leading, spacing: 8) {
-                        
                         if let info = stand.info, !info.isEmpty {
                             Text(info)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
+                                .lineLimit(3)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Divider()
+                    
+                    // Angebot
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Angebot")
+                            .font(.headline)
+                        if !stand.offers.isEmpty {
+                            ForEach(stand.offers.prefix(5)) { offer in
+                                Text(" - \(offer.name): \(offer.price, specifier: "%.2f€")")
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -59,5 +73,5 @@ struct BoothDetailSheet: View {
 }
 
 #Preview {
-    BoothDetailSheet(stand: StandManager().stands.first!)
+    BoothDetailSheet(stand: defaultStand)
 }
