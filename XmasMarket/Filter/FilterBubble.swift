@@ -14,12 +14,10 @@ struct BubbleView: View {
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
-                    ForEach(BoothType.allCasesBut) { type in
+                    ForEach(sortedBoothTypes) { type in
                         FilterBubble(type: type, isSelected: selectedTypes.contains(type)) {
-                            if selectedTypes.contains(type) {
-                                selectedTypes.remove(type)
-                            } else {
-                                selectedTypes.insert(type)
+                            withAnimation(.easeInOut) {
+                                toggleSelection(of: type)
                             }
                         }
                     }
@@ -30,6 +28,26 @@ struct BubbleView: View {
             Spacer()
         }
     }
+    
+    private var sortedBoothTypes: [BoothType] {
+        BoothType.allCasesBut.sorted {
+            let isFirstSelected = selectedTypes.contains($0)
+            let isSecondSelected = selectedTypes.contains($1)
+            
+            if isFirstSelected == isSecondSelected {
+                return $0.rawValue < $1.rawValue
+            }
+            return isFirstSelected && !isSecondSelected
+        }
+    }
+    
+    private func toggleSelection(of type: BoothType) {
+        if selectedTypes.contains(type) {
+            selectedTypes.remove(type)
+        } else {
+            selectedTypes.insert(type)
+        }
+    }
 }
 
 struct FilterBubble: View {
@@ -38,19 +56,21 @@ struct FilterBubble: View {
     let onTap: () -> Void
     
     var body: some View {
-        Text(type.icon + type.displayName)
-            .font(.caption)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .background(
-                Capsule()
-                    .fill(.ultraThinMaterial)
-                    .overlay(
-                        Capsule()
-                            .stroke(type.color.opacity(isSelected ? 0.9 : 0.4), lineWidth: 2)
-                    )
-            )
-            .foregroundColor(isSelected ? type.color : .gray)
-            .onTapGesture { onTap() }
+        Group {
+            Text(type.icon + type.displayName)
+                .font(.caption)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(
+                    Capsule()
+                        .fill(.ultraThinMaterial)
+                        .overlay(
+                            Capsule()
+                                .stroke(type.color.opacity(isSelected ? 0.9 : 0.4), lineWidth: 2)
+                        )
+                )
+                .foregroundColor(isSelected ? type.color : .gray)
+        }
+        .onTapGesture { onTap() }
     }
 }

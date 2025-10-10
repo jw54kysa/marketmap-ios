@@ -53,7 +53,7 @@ struct MapView: View {
                                     region.span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
                                 }
                             }) {
-                                Text(stand.icon ?? "")
+                                Text(stand.boothType.icon)
                                     .font(.title)
                                     .shadow(radius: 3)
                             }
@@ -117,7 +117,7 @@ struct MapView: View {
             }
             // ListView
             .sheet(isPresented: $isListViewPresented) {
-                StandListView(standManager: standManager)
+                StandListView(standManager: standManager, selectedTypes: $selectedTypes)
                     .presentationDetents([.medium, .large])
             }
         }

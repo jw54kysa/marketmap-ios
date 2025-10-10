@@ -24,10 +24,15 @@ struct BoothDetailSheet: View {
                         .clipped()
                         .cornerRadius(12)
                     
-                    Divider()
                     
                     // Extra info
                     VStack(alignment: .leading, spacing: 8) {
+                        if let openingHours = stand.open_time, let closingHours = stand.close_time {
+                            Text("Öffnungszeiten: \(openingHours) - \(closingHours)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        
                         if let info = stand.info, !info.isEmpty {
                             Text(info)
                                 .font(.subheadline)
