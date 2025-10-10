@@ -96,7 +96,7 @@ class StandManager: ObservableObject {
                 DispatchQueue.main.async {
                     print(data)
                     self.errorMessage = "Decoding error: \(error.localizedDescription)"
-                    print("📉❌ fetched decodeing error")
+                    print("📉❌ fetched decoding error: \(error.localizedDescription)")
                 }
             }
         }.resume()

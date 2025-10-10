@@ -29,8 +29,8 @@ struct BoothDetailSheet: View {
                     // Extra info (example)
                     VStack(alignment: .leading, spacing: 8) {
                         
-                        if !stand.info.isEmpty {
-                            Text(stand.info)
+                        if let info = stand.info, !info.isEmpty {
+                            Text(info)
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }

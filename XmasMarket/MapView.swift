@@ -53,7 +53,7 @@ struct MapView: View {
                                     region.span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
                                 }
                             }) {
-                                Text(stand.icon)
+                                Text(stand.icon ?? "")
                                     .font(.title)
                                     .shadow(radius: 3)
                             }

@@ -20,7 +20,7 @@ struct StandListView: View {
             } else {
                 List(standManager.stands) { stand in
                     HStack(spacing: 10) {
-                        Text(stand.icon)
+                        Text(stand.icon ?? "")
                             .font(.title)
                         VStack(alignment: .leading) {
                             Text(stand.name)
