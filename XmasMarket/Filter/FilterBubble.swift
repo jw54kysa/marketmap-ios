@@ -6,26 +6,60 @@
 //
 import SwiftUI
 
+import SwiftUI
+
+struct OutlinedText: View {
+    var text: String
+    var font: Font = .system(size: 48, weight: .bold)
+    var foreground: Color = .white
+    var outline: Color = .black
+    var lineWidth: CGFloat = 2
+
+    private var offsets: [CGPoint] {
+        // these offsets control thickness; add more points for a smoother outline
+        [CGPoint(x: -lineWidth, y: -lineWidth),
+         CGPoint(x:  lineWidth, y: -lineWidth),
+         CGPoint(x: -lineWidth, y:  lineWidth),
+         CGPoint(x:  lineWidth, y:  lineWidth),
+         CGPoint(x: 0, y: -lineWidth),
+         CGPoint(x: 0, y:  lineWidth),
+         CGPoint(x: -lineWidth, y: 0),
+         CGPoint(x:  lineWidth, y: 0)]
+    }
+
+    var body: some View {
+        ZStack {
+            ForEach(offsets, id: \.self) { off in
+                Text(text)
+                    .font(font)
+                    .foregroundColor(outline)
+                    .offset(x: off.x, y: off.y)
+            }
+            Text(text)
+                .font(font)
+                .foregroundColor(foreground)
+        }
+    }
+}
+
+
 struct BubbleView: View {
     
     @Binding var selectedTypes: Set<BoothType>
     
     var body: some View {
-        VStack {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(sortedBoothTypes) { type in
-                        FilterBubble(type: type, isSelected: selectedTypes.contains(type)) {
-                            withAnimation(.easeInOut) {
-                                toggleSelection(of: type)
-                            }
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(sortedBoothTypes) { type in
+                    FilterBubble(type: type, isSelected: selectedTypes.contains(type)) {
+                        withAnimation(.easeInOut) {
+                            toggleSelection(of: type)
                         }
                     }
                 }
-                .padding(.horizontal)
-                .padding(.vertical, 8)
             }
-            Spacer()
+            .padding(.horizontal, 1)
+            .padding(.vertical, 8)
         }
     }
     
@@ -73,4 +107,11 @@ struct FilterBubble: View {
         }
         .onTapGesture { onTap() }
     }
+}
+
+#Preview {
+    VStack {
+        
+    }
+    BubbleView(selectedTypes: .constant([.food]))
 }

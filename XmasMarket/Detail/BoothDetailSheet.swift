@@ -16,14 +16,31 @@ struct BoothDetailSheet: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 16) {
-                    // Booth Image
-                    Image(stand.boothType == .entertainment ? .buehne : .booth)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(height: 200)
-                        .clipped()
-                        .cornerRadius(12)
-                    
+                    if let imageURL = stand.imageURL {
+                        AsyncImage(url: imageURL) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .frame(height: 200)
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(maxWidth: .infinity, maxHeight: 200)
+                                    .clipped()
+                                    .cornerRadius(12)
+                            case .failure:
+                                Image(.booth)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(maxWidth: .infinity, maxHeight: 200)
+                                    .clipped()
+                                    .cornerRadius(12)
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
+                    }
                     
                     // Extra info
                     VStack(alignment: .leading, spacing: 8) {
@@ -64,15 +81,15 @@ struct BoothDetailSheet: View {
                 .padding()
             }
             .navigationTitle(stand.boothType.icon + stand.name)
-            .toolbar {
-                ToolbarItem {
-                    Button(action: {
-                        
-                    }) {
-                        Image(systemName: "arrow.trianglehead.counterclockwise")
-                    }
-                }
-            }
+            //            .toolbar {
+            //                ToolbarItem {
+            //                    Button(action: {
+            //
+            //                    }) {
+            //                        Image(systemName: "arrow.trianglehead.counterclockwise")
+            //                    }
+            //                }
+            //            }
         }
     }
 }

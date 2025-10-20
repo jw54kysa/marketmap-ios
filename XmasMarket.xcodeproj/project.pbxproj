@@ -31,6 +31,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		473258C62EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "XmasMarketTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Fascinate-Regular.ttf",
+			);
+			target = 47BB3EA02E86A4EB0041C897 /* XmasMarketTests */;
+		};
+		473258C72EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "XmasMarketUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Fascinate-Regular.ttf",
+			);
+			target = 47BB3EAA2E86A4EB0041C897 /* XmasMarketUITests */;
+		};
 		47BB3EC42E8AA0150041C897 /* Exceptions for "XmasMarket" folder in "XmasMarket" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -45,6 +59,8 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				47BB3EC42E8AA0150041C897 /* Exceptions for "XmasMarket" folder in "XmasMarket" target */,
+				473258C62EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "XmasMarketTests" target */,
+				473258C72EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "XmasMarketUITests" target */,
 			);
 			path = XmasMarket;
 			sourceTree = "<group>";

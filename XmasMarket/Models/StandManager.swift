@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class StandManager: ObservableObject {
     @Published var stands: [Stand] = []
@@ -15,11 +16,29 @@ class StandManager: ObservableObject {
     @Published var errorMessage: String?
 
     private let cacheFileName = "stands.json"
-    private let apiURL = URL(string: "http://marketmap-app.de:8000/api/stands")!
+    private let apiURL = URL(string: "\(domain)/api/stands")!
+    
+    private var marketSelectedNotification: AnyCancellable?
+    private var marketSelectedNotificationNil: AnyCancellable?
 
     init() {
-        loadFromCache()
-        fetchStands()
+        if InitManager.shared.selectedMarket != nil {
+            loadFromCache()
+            fetchStands()
+        }
+        
+        marketSelectedNotification = NotificationCenter.default
+                    .publisher(for: .selectedMarket)
+                    .sink { _ in
+                        self.loadFromCache()
+                        self.fetchStands()
+                    }
+        
+        marketSelectedNotificationNil = NotificationCenter.default
+            .publisher(for: .selectedMarketNil)
+            .sink { _ in
+                self.stands.removeAll()
+            }
     }
 
     // MARK: - Paths
@@ -51,7 +70,7 @@ class StandManager: ObservableObject {
         do {
             let data = try Data(contentsOf: cacheURL)
             let cachedStands = try JSONDecoder().decode([Stand].self, from: data)
-            self.stands = cachedStands
+            self.stands = cachedStands.filter { $0.name == InitManager.shared.selectedMarket!.self }
             print("💾 loaded from cached")
         } catch {
             print("Failed to load cache: \(error.localizedDescription)")

@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct StandListView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     @ObservedObject var standManager: StandManager
     @Binding var selectedTypes: Set<BoothType>
     @State private var selectedStand: Stand? = nil
@@ -27,34 +29,46 @@ struct StandListView: View {
                 } else if let error = standManager.errorMessage {
                     Text("\(error)").foregroundColor(.red)
                 } else {
+                    
                     List {
-                        BubbleView(selectedTypes: $selectedTypes)
-                            .listRowInsets(EdgeInsets()) // Optional: removes padding
-                            .listRowBackground(Color.clear) // Optional: match background
-
-                        ForEach(filteredLocations) { stand in
-                            HStack(spacing: 10) {
-                                Text(stand.boothType.icon)
-                                    .font(.title)
-                                VStack(alignment: .leading) {
-                                    Text(stand.name)
-                                        .font(.headline)
-                                    Text(stand.boothType.displayName)
-                                        .font(.subheadline)
+                        Section(header:
+                                    BubbleView(selectedTypes: $selectedTypes)
+                            .listRowBackground(Color.clear)
+                        ) {
+                            ForEach(filteredLocations) { stand in
+                                HStack(spacing: 10) {
+                                    Text(stand.boothType.icon)
+                                        .font(.title)
+                                    VStack(alignment: .leading) {
+                                        Text(stand.name)
+                                            .font(.headline)
+                                        Text(stand.boothType.displayName)
+                                            .font(.subheadline)
+                                    }
+                                    Spacer()
                                 }
-                                Spacer()
-                            }
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                selectedStand = stand
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    selectedStand = stand
+                                }
                             }
                         }
+                        
                     }
-
+                    
                 }
             }
             .animation(.easeInOut, value: standManager.isLoading)
             .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        InitManager.shared.selectedMarket = nil
+                        NotificationCenter.default.post(name: .selectedMarketNil, object: nil)
+                        dismiss()
+                    }) {
+                        Image(systemName: "arrow.trianglehead.swap")
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         standManager.fetchStands()
@@ -64,6 +78,7 @@ struct StandListView: View {
                 }
             }
             .navigationTitle("Stände")
+            .navigationBarTitleDisplayMode(.automatic)
             
             // MARK: SHEET
             .sheet(item: $selectedStand) { stand in

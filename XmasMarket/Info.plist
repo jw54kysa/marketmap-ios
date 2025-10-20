@@ -2,26 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <!-- Location usage description -->
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Wir benötigen deinen Standort, um die Karte korrekt anzuzeigen.</string>
-
-    <!-- App Transport Security Einstellungen -->
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-        <!-- Optional: Falls du nur HTTP für localhost erlauben willst -->
-        <key>NSExceptionDomains</key>
-        <dict>
-            <key>localhost</key>
-            <dict>
-                <key>NSExceptionAllowsInsecureHTTPLoads</key>
-                <true/>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-            </dict>
-        </dict>
-    </dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fascinate-Regular.ttf</string>
+		<string>Modak-Regular.ttf</string>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Wir benötigen deinen Standort, um die Karte korrekt anzuzeigen.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

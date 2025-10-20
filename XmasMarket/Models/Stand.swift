@@ -25,6 +25,7 @@ struct Stand: Codable, Identifiable, Equatable {
     let close_time: String?
     let lat: Double?
     let lng: Double?
+    let image: String?
     
     var coordinate: CLLocationCoordinate2D {
         guard let lat, let lng else {
@@ -39,6 +40,13 @@ struct Stand: Codable, Identifiable, Equatable {
         }
         return BoothType(rawValue: type)
     }
+    
+    var imageURL: URL? {
+        guard let image else {
+            return nil
+        }
+        return URL(string: "\(domain)/images/\(image)")
+    }
 }
 
 let defaultStand = Stand(
@@ -51,5 +59,6 @@ let defaultStand = Stand(
     open_time: "12:00",
     close_time: "22:00",
     lat: 51.3397,  // Leipzig latitude
-    lng: 12.3731   // Leipzig longitude
+    lng: 12.3731,   // Leipzig longitude
+    image: "gluwein.jpg"
 )

@@ -26,7 +26,7 @@ struct MapView: View {
         if selectedTypes.isEmpty {
             return standManager.stands
         } else {
-            return standManager.stands.filter { return selectedTypes.map{$0.rawValue}.contains($0.type)}
+            return standManager.stands.filter { return selectedTypes.map{$0.rawValue}.contains($0.type) }
         }
     }
     
@@ -72,15 +72,24 @@ struct MapView: View {
                 }
                 .mapStyle(.standard(pointsOfInterest: .including([.publicTransport])))
                 .edgesIgnoringSafeArea(.all)
-                
-                // MARK: Bubble View
-                
-                BubbleView(selectedTypes: $selectedTypes)
-                
-                // MARK: Buttons
-                
+
                 VStack {
+                    
+                    // MARK: Schriftzug
+                    
+                    VStack ( spacing: -10 ) {
+                        OutlinedText(text: "MarktKarte", font: .custom("Modak", size: 50, relativeTo: .title),
+                                     foreground: .accent, outline: .white, lineWidth: 2)
+                        
+                        // MARK: Bubble View
+                        
+                        BubbleView(selectedTypes: $selectedTypes)
+                    }
+                    
                     Spacer()
+                    
+                    // MARK: Buttons
+                    
                     HStack {
                         
                         Button(action: { isListViewPresented.toggle() }) {
