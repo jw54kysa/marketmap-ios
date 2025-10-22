@@ -4,12 +4,11 @@
 //
 //  Created by Private Jon on 29.09.25.
 //
-
-
 import SwiftUI
 import MapKit
 
 struct BoothDetailSheet: View {
+    @StateObject var ratingManager = RatingManager()
     let stand: Stand
     
     var body: some View {
@@ -103,12 +102,13 @@ struct BoothDetailSheet: View {
                     VStack(alignment: .leading, spacing: -10) {
                         Text("Bewertung")
                             .font(.custom("Modak", size: 30, relativeTo: .title))
-                        Text("Gib jetzt eine Bewertung für den Stand ab.")
+                        Text(ratingManager.currentRating == nil ? "Gib jetzt eine Bewertung für den Stand ab.": "Du hast diesen Stand bereits bewertet.")
                             .font(.headline)
                             .lineLimit(2)
                         HStack {
                             Spacer()
                             StarRatingView(
+                                ratingManager: ratingManager,
                                 deviceUUID: UserDefaults.standard.string(forKey: "deviceID"),
                                 standID: stand.id
                             )

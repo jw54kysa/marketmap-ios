@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct StarRatingView: View {
-    @StateObject private var ratingManager = RatingManager()
+    @ObservedObject var ratingManager: RatingManager
     let maxRating = 5
     
     var deviceUUID: String?

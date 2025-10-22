@@ -6,6 +6,11 @@
 //
 import SwiftUI
 
+struct InitType {
+    let name: String
+    let count: Int
+}
+
 enum BoothType: String, CaseIterable, Identifiable {
     case wine
     case food

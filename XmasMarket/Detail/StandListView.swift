@@ -31,7 +31,7 @@ struct StandListView: View {
                 } else {
                     List {
                         Section(header:
-                                    BubbleView(selectedTypes: $selectedTypes)
+                                    BubbleView(standManager: standManager, selectedTypes: $selectedTypes)
                             .padding(.horizontal, -30)
                             .listRowBackground(Color.clear)
                         ) {

@@ -25,6 +25,7 @@ struct ContentView: View {
             .sheet(isPresented: $showPopup) {
                 InitPopup(markets: initManager.availableMarkets ?? [])
                     .presentationDetents([.medium])
+                    .interactiveDismissDisabled()
             }
             .onReceive(NotificationCenter.default.publisher(for: .selectedMarketNil)) { _ in
                 showPopup.toggle()

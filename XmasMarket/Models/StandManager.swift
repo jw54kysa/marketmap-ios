@@ -16,7 +16,6 @@ class StandManager: ObservableObject {
     @Published var errorMessage: String?
 
     private let cacheFileName = "stands.json"
-    private let apiURL = URL(string: "\(domain)/api/stands")!
     
     private var marketSelectedNotification: AnyCancellable?
     private var marketSelectedNotificationNil: AnyCancellable?
@@ -82,6 +81,10 @@ class StandManager: ObservableObject {
     func fetchStands() {
         isLoading = true
         errorMessage = nil
+        
+        guard let selectedMarket = InitManager.shared.selectedMarket,
+                let apiURL = URL(string: "\(domain)/api/stands?event=\(selectedMarket)")
+        else { return }
 
         URLSession.shared.dataTask(with: apiURL) { data, response, error in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -119,5 +122,17 @@ class StandManager: ObservableObject {
                 }
             }
         }.resume()
+    }
+    
+    // MARK: Types
+    
+    /// return all Types
+    func getAllTypes() -> [BoothType] {
+        let counts = Dictionary(grouping: stands.map(\.boothType), by: { $0 })
+            .mapValues { $0.count }
+        
+        return counts
+            .sorted { $0.value > $1.value }
+            .map { $0.key }
     }
 }

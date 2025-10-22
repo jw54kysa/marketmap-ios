@@ -16,6 +16,9 @@ struct Offer: Codable, Identifiable, Equatable {
 
 struct Stand: Codable, Identifiable, Equatable {
     let id: Int
+    let city: String?
+    let event: String?
+    let section: String?
     let name: String
     let icon: String?
     let type: String?
@@ -52,6 +55,9 @@ struct Stand: Codable, Identifiable, Equatable {
 
 let defaultStand = Stand(
     id: 0,
+    city: "Leipzig",
+    event: "wm",
+    section: "1",
     name: "Default Leipzig Stand",
     icon: "🍷",
     type: "wine",

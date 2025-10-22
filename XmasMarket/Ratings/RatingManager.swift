@@ -27,7 +27,7 @@ class RatingManager: ObservableObject {
         if let lastTime = lastSubmissionTime {
             let elapsed = Date().timeIntervalSince(lastTime)
             if elapsed < 60 {
-                self.errorMessage = "Bitte warten ..."
+                //self.errorMessage = "Bitte warte 5 min..."
                 return
             }
         }

@@ -33,6 +33,15 @@ struct InitPopup: View {
                 }
             }
             .navigationTitle("Marktauswahl")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        InitManager.shared.sendDeviceActivation()
+                    }) {
+                        Image(systemName: "arrow.trianglehead.counterclockwise")
+                    }
+                }
+            }
         }
     }
 }

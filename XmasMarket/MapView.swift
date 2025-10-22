@@ -74,17 +74,29 @@ struct MapView: View {
                 .edgesIgnoringSafeArea(.all)
 
                 VStack {
-                    
-                    // MARK: Schriftzug
-                    
-                    VStack ( spacing: -10 ) {
-                        OutlinedText(text: "MarktKarte", font: .custom("Modak", size: 50, relativeTo: .title),
-                                     foreground: .accent, outline: .white, lineWidth: 2)
+                    ZStack {
+                        LinearGradient(
+                            colors: [.accent, .white.opacity(0)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .allowsHitTesting(false)
                         
-                        // MARK: Bubble View
+                        // MARK: Schriftzug
                         
-                        BubbleView(selectedTypes: $selectedTypes)
+                        VStack ( spacing: -10 ) {
+                            Spacer()
+                            OutlinedText(text: "MarktKarte", font: .custom("Modak", size: 55, relativeTo: .title),
+                                         foreground: .accent, outline: .white, lineWidth: 2)
+                            
+                            // MARK: Bubble View
+                            
+                            BubbleView(standManager: standManager, selectedTypes: $selectedTypes)
+                        }
+                        
                     }
+                    .frame(height: 150)
+                    .ignoresSafeArea()
                     
                     Spacer()
                     
@@ -94,32 +106,38 @@ struct MapView: View {
                         
                         Button(action: { isListViewPresented.toggle() }) {
                             Image(systemName: "list.bullet")
-                                .padding()
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 22)
+                                .padding(20)
                                 .background(.ultraThinMaterial)
                                 .clipShape(Circle())
-                                .shadow(radius: 5)
+                                .shadow(radius: 8)
                         }
                             
                         Spacer()
                         
                         Button(action: centerOnUser) {
                             Image(systemName: "location.fill")
-                                .padding()
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 22)
+                                .padding(20)
                                 .background(.ultraThinMaterial)
                                 .clipShape(Circle())
-                                .shadow(radius: 5)
+                                .shadow(radius: 8)
                             
                         }
                         
                     }
-                    .padding()
+                    .padding(22)
                 }
                 
                 if standManager.isLoading {
                     SnowfallLoadingOverlay()
                 }
             }
-            //.navigationTitle("MarketMap")
+            // Booth Detail
             .sheet(item: $selectedStand) { stand in
                 BoothDetailSheet(stand: stand)
                     .presentationDetents([.medium, .large])

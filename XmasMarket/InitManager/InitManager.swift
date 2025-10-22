@@ -37,6 +37,7 @@ class InitManager: ObservableObject {
         }
     }
     
+    // Available Markets and track activation
     func sendDeviceActivation() {
         let deviceUUID = getDeviceID()
         

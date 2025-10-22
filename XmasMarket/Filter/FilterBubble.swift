@@ -6,8 +6,6 @@
 //
 import SwiftUI
 
-import SwiftUI
-
 struct OutlinedText: View {
     var text: String
     var font: Font = .system(size: 48, weight: .bold)
@@ -16,7 +14,6 @@ struct OutlinedText: View {
     var lineWidth: CGFloat = 2
 
     private var offsets: [CGPoint] {
-        // these offsets control thickness; add more points for a smoother outline
         [CGPoint(x: -lineWidth, y: -lineWidth),
          CGPoint(x:  lineWidth, y: -lineWidth),
          CGPoint(x: -lineWidth, y:  lineWidth),
@@ -44,7 +41,7 @@ struct OutlinedText: View {
 
 
 struct BubbleView: View {
-    
+    @ObservedObject var standManager: StandManager
     @Binding var selectedTypes: Set<BoothType>
     
     var body: some View {
@@ -65,7 +62,8 @@ struct BubbleView: View {
     }
     
     private var sortedBoothTypes: [BoothType] {
-        BoothType.allCasesBut.sorted {
+//        standManager.getAllTypes().sorted {
+            BoothType.allCasesBut.sorted {
             let isFirstSelected = selectedTypes.contains($0)
             let isSecondSelected = selectedTypes.contains($1)
             
@@ -98,7 +96,7 @@ struct FilterBubble: View {
                 .padding(.vertical, 8)
                 .background(
                     Capsule()
-                        .fill(.ultraThinMaterial)
+                        .fill(type.color.opacity(isSelected ? 0.3 : 0.1))
                         .overlay(
                             Capsule()
                                 .stroke(type.color.opacity(isSelected ? 0.9 : 0.4), lineWidth: 2)
@@ -111,8 +109,6 @@ struct FilterBubble: View {
 }
 
 #Preview {
-    VStack {
-        
-    }
-    BubbleView(selectedTypes: .constant([.food]))
+    @Previewable @State var selectedTypes: Set<BoothType> = []
+    BubbleView(standManager: StandManager(), selectedTypes: $selectedTypes)
 }
