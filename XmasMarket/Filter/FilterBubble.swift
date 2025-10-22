@@ -62,8 +62,7 @@ struct BubbleView: View {
     }
     
     private var sortedBoothTypes: [BoothType] {
-//        standManager.getAllTypes().sorted {
-            BoothType.allCasesBut.sorted {
+        standManager.getAllTypes().sorted {
             let isFirstSelected = selectedTypes.contains($0)
             let isSecondSelected = selectedTypes.contains($1)
             

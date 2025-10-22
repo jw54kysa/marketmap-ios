@@ -24,32 +24,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		47BB3E942E86A4EA0041C897 /* XmasMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XmasMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		47BB3EA12E86A4EB0041C897 /* XmasMarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XmasMarketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		47BB3EAB2E86A4EB0041C897 /* XmasMarketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XmasMarketUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		47BB3E942E86A4EA0041C897 /* MarketMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarketMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		47BB3EA12E86A4EB0041C897 /* MarketMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		47BB3EAB2E86A4EB0041C897 /* MarketMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		473258C62EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "XmasMarketTests" target */ = {
+		473258C62EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "MarketMapTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Fascinate-Regular.ttf",
 			);
-			target = 47BB3EA02E86A4EB0041C897 /* XmasMarketTests */;
+			target = 47BB3EA02E86A4EB0041C897 /* MarketMapTests */;
 		};
-		473258C72EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "XmasMarketUITests" target */ = {
+		473258C72EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "MarketMapUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Fascinate-Regular.ttf",
 			);
-			target = 47BB3EAA2E86A4EB0041C897 /* XmasMarketUITests */;
+			target = 47BB3EAA2E86A4EB0041C897 /* MarketMapUITests */;
 		};
-		47BB3EC42E8AA0150041C897 /* Exceptions for "XmasMarket" folder in "XmasMarket" target */ = {
+		47BB3EC42E8AA0150041C897 /* Exceptions for "XmasMarket" folder in "MarketMap" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 47BB3E932E86A4EA0041C897 /* XmasMarket */;
+			target = 47BB3E932E86A4EA0041C897 /* MarketMap */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -57,9 +57,9 @@
 		47BB3E962E86A4EA0041C897 /* XmasMarket */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				47BB3EC42E8AA0150041C897 /* Exceptions for "XmasMarket" folder in "XmasMarket" target */,
-				473258C62EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "XmasMarketTests" target */,
-				473258C72EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "XmasMarketUITests" target */,
+				47BB3EC42E8AA0150041C897 /* Exceptions for "XmasMarket" folder in "MarketMap" target */,
+				473258C62EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "MarketMapTests" target */,
+				473258C72EA6B62200AABCF6 /* Exceptions for "XmasMarket" folder in "MarketMapUITests" target */,
 			);
 			path = XmasMarket;
 			sourceTree = "<group>";
@@ -114,9 +114,9 @@
 		47BB3E952E86A4EA0041C897 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				47BB3E942E86A4EA0041C897 /* XmasMarket.app */,
-				47BB3EA12E86A4EB0041C897 /* XmasMarketTests.xctest */,
-				47BB3EAB2E86A4EB0041C897 /* XmasMarketUITests.xctest */,
+				47BB3E942E86A4EA0041C897 /* MarketMap.app */,
+				47BB3EA12E86A4EB0041C897 /* MarketMapTests.xctest */,
+				47BB3EAB2E86A4EB0041C897 /* MarketMapUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,9 +124,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		47BB3E932E86A4EA0041C897 /* XmasMarket */ = {
+		47BB3E932E86A4EA0041C897 /* MarketMap */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 47BB3EB52E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "XmasMarket" */;
+			buildConfigurationList = 47BB3EB52E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "MarketMap" */;
 			buildPhases = (
 				47BB3E902E86A4EA0041C897 /* Sources */,
 				47BB3E912E86A4EA0041C897 /* Frameworks */,
@@ -139,16 +139,16 @@
 			fileSystemSynchronizedGroups = (
 				47BB3E962E86A4EA0041C897 /* XmasMarket */,
 			);
-			name = XmasMarket;
+			name = MarketMap;
 			packageProductDependencies = (
 			);
 			productName = XmasMarket;
-			productReference = 47BB3E942E86A4EA0041C897 /* XmasMarket.app */;
+			productReference = 47BB3E942E86A4EA0041C897 /* MarketMap.app */;
 			productType = "com.apple.product-type.application";
 		};
-		47BB3EA02E86A4EB0041C897 /* XmasMarketTests */ = {
+		47BB3EA02E86A4EB0041C897 /* MarketMapTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 47BB3EB82E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "XmasMarketTests" */;
+			buildConfigurationList = 47BB3EB82E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "MarketMapTests" */;
 			buildPhases = (
 				47BB3E9D2E86A4EB0041C897 /* Sources */,
 				47BB3E9E2E86A4EB0041C897 /* Frameworks */,
@@ -162,16 +162,16 @@
 			fileSystemSynchronizedGroups = (
 				47BB3EA42E86A4EB0041C897 /* XmasMarketTests */,
 			);
-			name = XmasMarketTests;
+			name = MarketMapTests;
 			packageProductDependencies = (
 			);
 			productName = XmasMarketTests;
-			productReference = 47BB3EA12E86A4EB0041C897 /* XmasMarketTests.xctest */;
+			productReference = 47BB3EA12E86A4EB0041C897 /* MarketMapTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		47BB3EAA2E86A4EB0041C897 /* XmasMarketUITests */ = {
+		47BB3EAA2E86A4EB0041C897 /* MarketMapUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 47BB3EBB2E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "XmasMarketUITests" */;
+			buildConfigurationList = 47BB3EBB2E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "MarketMapUITests" */;
 			buildPhases = (
 				47BB3EA72E86A4EB0041C897 /* Sources */,
 				47BB3EA82E86A4EB0041C897 /* Frameworks */,
@@ -185,11 +185,11 @@
 			fileSystemSynchronizedGroups = (
 				47BB3EAE2E86A4EB0041C897 /* XmasMarketUITests */,
 			);
-			name = XmasMarketUITests;
+			name = MarketMapUITests;
 			packageProductDependencies = (
 			);
 			productName = XmasMarketUITests;
-			productReference = 47BB3EAB2E86A4EB0041C897 /* XmasMarketUITests.xctest */;
+			productReference = 47BB3EAB2E86A4EB0041C897 /* MarketMapUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -215,7 +215,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 47BB3E8F2E86A4EA0041C897 /* Build configuration list for PBXProject "XmasMarket" */;
+			buildConfigurationList = 47BB3E8F2E86A4EA0041C897 /* Build configuration list for PBXProject "MarketMap" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -229,9 +229,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				47BB3E932E86A4EA0041C897 /* XmasMarket */,
-				47BB3EA02E86A4EB0041C897 /* XmasMarketTests */,
-				47BB3EAA2E86A4EB0041C897 /* XmasMarketUITests */,
+				47BB3E932E86A4EA0041C897 /* MarketMap */,
+				47BB3EA02E86A4EB0041C897 /* MarketMapTests */,
+				47BB3EAA2E86A4EB0041C897 /* MarketMapUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -287,12 +287,12 @@
 /* Begin PBXTargetDependency section */
 		47BB3EA32E86A4EB0041C897 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 47BB3E932E86A4EA0041C897 /* XmasMarket */;
+			target = 47BB3E932E86A4EA0041C897 /* MarketMap */;
 			targetProxy = 47BB3EA22E86A4EB0041C897 /* PBXContainerItemProxy */;
 		};
 		47BB3EAD2E86A4EB0041C897 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 47BB3E932E86A4EA0041C897 /* XmasMarket */;
+			target = 47BB3E932E86A4EA0041C897 /* MarketMap */;
 			targetProxy = 47BB3EAC2E86A4EB0041C897 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -430,17 +430,19 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XmasMarket/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MarktKarte;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Wir benötigen deinen Standort, um die Karte korrekt anzuzeigen.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonweske.XmasMarket;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonweske.marketMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -459,17 +461,19 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XmasMarket/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MarktKarte;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Wir benötigen deinen Standort, um die Karte korrekt anzuzeigen.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonweske.XmasMarket;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonweske.marketMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -492,7 +496,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XmasMarket.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/XmasMarket";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarketMap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MarketMap";
 			};
 			name = Debug;
 		};
@@ -511,7 +515,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XmasMarket.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/XmasMarket";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarketMap.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MarketMap";
 			};
 			name = Release;
 		};
@@ -552,7 +556,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		47BB3E8F2E86A4EA0041C897 /* Build configuration list for PBXProject "XmasMarket" */ = {
+		47BB3E8F2E86A4EA0041C897 /* Build configuration list for PBXProject "MarketMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				47BB3EB32E86A4EB0041C897 /* Debug */,
@@ -561,7 +565,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		47BB3EB52E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "XmasMarket" */ = {
+		47BB3EB52E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "MarketMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				47BB3EB62E86A4EB0041C897 /* Debug */,
@@ -570,7 +574,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		47BB3EB82E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "XmasMarketTests" */ = {
+		47BB3EB82E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "MarketMapTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				47BB3EB92E86A4EB0041C897 /* Debug */,
@@ -579,7 +583,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		47BB3EBB2E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "XmasMarketUITests" */ = {
+		47BB3EBB2E86A4EB0041C897 /* Build configuration list for PBXNativeTarget "MarketMapUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				47BB3EBC2E86A4EB0041C897 /* Debug */,
