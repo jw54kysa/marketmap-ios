@@ -27,7 +27,6 @@
 		47BB3E942E86A4EA0041C897 /* XmasMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XmasMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47BB3EA12E86A4EB0041C897 /* XmasMarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XmasMarketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47BB3EAB2E86A4EB0041C897 /* XmasMarketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XmasMarketUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		47BB3EC52E8AA6590041C897 /* Leipzig.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Leipzig.gpx; path = ../../Downloads/Leipzig.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -105,7 +104,6 @@
 		47BB3E8B2E86A4EA0041C897 = {
 			isa = PBXGroup;
 			children = (
-				47BB3EC52E8AA6590041C897 /* Leipzig.gpx */,
 				47BB3E962E86A4EA0041C897 /* XmasMarket */,
 				47BB3EA42E86A4EB0041C897 /* XmasMarketTests */,
 				47BB3EAE2E86A4EB0041C897 /* XmasMarketUITests */,

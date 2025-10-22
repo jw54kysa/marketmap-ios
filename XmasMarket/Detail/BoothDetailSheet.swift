@@ -16,6 +16,7 @@ struct BoothDetailSheet: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 16) {
+                    
                     if let imageURL = stand.imageURL {
                         AsyncImage(url: imageURL) { phase in
                             switch phase {
@@ -44,17 +45,41 @@ struct BoothDetailSheet: View {
                     
                     // Extra info
                     VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Text(stand.boothType.icon + " " + stand.boothType.displayName)
+                                .font(.custom("Modak", size: 30, relativeTo: .title))
+                            
+                            Spacer()
+                            
+                            HStack(alignment: .top) {
+                                if let rating = stand.rating {
+                                    Text(String(format: "%.1f", rating))
+                                        .font(.custom("Modak", size: 30, relativeTo: .title))
+                                } else {
+                                    Text("-")
+                                        .font(.custom("Modak", size: 30, relativeTo: .title))
+                                }
+                                
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30)
+                                    .foregroundStyle(.yellow)
+                                    .padding(.top, 2)
+                                
+                            }
+                        }
+                        
                         if let openingHours = stand.open_time, let closingHours = stand.close_time {
-                            Text("Öffnungszeiten: \(openingHours) - \(closingHours)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                            Text("Offen von \(openingHours) - \(closingHours) Uhr")
+                                .font(.headline)
+                                .lineLimit(1)
                         }
                         
                         if let info = stand.info, !info.isEmpty {
                             Text(info)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .lineLimit(3)
+                                .font(.headline)
+                                .lineLimit(8)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -64,10 +89,10 @@ struct BoothDetailSheet: View {
                     // Angebot
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Angebot")
-                            .font(.headline)
+                            .font(.custom("Modak", size: 30, relativeTo: .title))
                         if !stand.offers.isEmpty {
                             ForEach(stand.offers.prefix(5)) { offer in
-                                Text(" - \(offer.name): \(offer.price, specifier: "%.2f€")")
+                                Text(" - \(offer.name): \(offer.price, specifier: "%.2f €")")
                             }
                         }
                     }
@@ -75,21 +100,42 @@ struct BoothDetailSheet: View {
                     
                     Divider()
                     
-                    CompassView(locationManager: LocationManager(),
-                                destination: stand.coordinate)
+                    VStack(alignment: .leading, spacing: -10) {
+                        Text("Bewertung")
+                            .font(.custom("Modak", size: 30, relativeTo: .title))
+                        Text("Gib jetzt eine Bewertung für den Stand ab.")
+                            .font(.headline)
+                            .lineLimit(2)
+                        HStack {
+                            Spacer()
+                            StarRatingView(
+                                deviceUUID: UserDefaults.standard.string(forKey: "deviceID"),
+                                standID: stand.id
+                            )
+                            Spacer()
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Divider()
+                    
+                    
+                    VStack(alignment: .leading, spacing: -10) {
+                        Text("Richtung")
+                            .font(.custom("Modak", size: 30, relativeTo: .title))
+                        HStack {
+                            Spacer()
+                            CompassView(locationManager: LocationManager(),
+                                        destination: stand.coordinate)
+                            Spacer()
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
                 }
                 .padding()
             }
-            .navigationTitle(stand.boothType.icon + stand.name)
-            //            .toolbar {
-            //                ToolbarItem {
-            //                    Button(action: {
-            //
-            //                    }) {
-            //                        Image(systemName: "arrow.trianglehead.counterclockwise")
-            //                    }
-            //                }
-            //            }
+            .navigationTitle(stand.name)
         }
     }
 }

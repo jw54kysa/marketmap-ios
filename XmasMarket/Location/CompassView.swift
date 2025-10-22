@@ -20,13 +20,13 @@ struct CompassView: View {
             ZStack {
                 Circle()
                     .stroke(lineWidth: 2)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.accent)
                     .frame(width: 150, height: 150)
                 
                 Image(systemName: "location.north.line.fill")
                     .resizable()
                     .frame(width: 50, height: 75)
-                    .foregroundColor(.red)
+                    .foregroundColor(.accent)
                     .shadow(radius: 5)
                     .rotationEffect(.degrees(needleRotationAngle()))
             }
@@ -35,9 +35,10 @@ struct CompassView: View {
                 let dist = distance(from: userLoc, to: destination)
                     Text("Noch \(formatDistance(dist))")
                     .font(.headline)
-                    .foregroundStyle(.red)
+                    .foregroundStyle(.accent)
             } else {
                 Text("Getting location...")
+                    .foregroundStyle(.accent)
             }
         }
         .onAppear {

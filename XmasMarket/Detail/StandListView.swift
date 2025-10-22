@@ -29,10 +29,10 @@ struct StandListView: View {
                 } else if let error = standManager.errorMessage {
                     Text("\(error)").foregroundColor(.red)
                 } else {
-                    
                     List {
                         Section(header:
                                     BubbleView(selectedTypes: $selectedTypes)
+                            .padding(.horizontal, -30)
                             .listRowBackground(Color.clear)
                         ) {
                             ForEach(filteredLocations) { stand in

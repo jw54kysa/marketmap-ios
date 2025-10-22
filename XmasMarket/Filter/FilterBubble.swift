@@ -50,6 +50,7 @@ struct BubbleView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
+                Text(" ")
                 ForEach(sortedBoothTypes) { type in
                     FilterBubble(type: type, isSelected: selectedTypes.contains(type)) {
                         withAnimation(.easeInOut) {
@@ -57,8 +58,8 @@ struct BubbleView: View {
                         }
                     }
                 }
+                Text(" ")
             }
-            .padding(.horizontal, 1)
             .padding(.vertical, 8)
         }
     }

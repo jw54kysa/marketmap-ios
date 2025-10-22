@@ -26,6 +26,7 @@ struct Stand: Codable, Identifiable, Equatable {
     let lat: Double?
     let lng: Double?
     let image: String?
+    let rating: Double?
     
     var coordinate: CLLocationCoordinate2D {
         guard let lat, let lng else {
@@ -60,5 +61,6 @@ let defaultStand = Stand(
     close_time: "22:00",
     lat: 51.3397,  // Leipzig latitude
     lng: 12.3731,   // Leipzig longitude
-    image: "gluwein.jpg"
+    image: "gluwein.jpg",
+    rating: 2.5
 )
