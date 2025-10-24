@@ -7,14 +7,27 @@
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
-struct Offer: Codable, Identifiable, Equatable {
+let offerIcons = ["Bratwurst": ["🌭", Color.brown],
+                  "Wein": ["🍷", Color.red],
+                  "Geschenke": ["🎁", Color.yellow]]
+
+struct Offer: Codable, Identifiable, Equatable, Hashable {
     let id: Int
     let name: String
     let price: Double
+    
+    var icon: String? {
+        return offerIcons[name]?.first as? String
+    }
+    
+    var color: Color {
+        return offerIcons[name]?.dropFirst().first as? Color ?? .gray
+    }
 }
 
-struct Stand: Codable, Identifiable, Equatable {
+struct Stand: Codable, Identifiable, Equatable, Hashable {
     let id: Int
     let city: String?
     let event: String?

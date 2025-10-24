@@ -10,14 +10,13 @@ struct StandListView: View {
     @Environment(\.dismiss) private var dismiss
     
     @ObservedObject var standManager: StandManager
-    @Binding var selectedTypes: Set<BoothType>
     @State private var selectedStand: Stand? = nil
     
     var filteredLocations: [Stand] {
-        if selectedTypes.isEmpty {
+        if standManager.selectedTypes.isEmpty {
             return standManager.stands
         } else {
-            return standManager.stands.filter { return selectedTypes.map{$0.rawValue}.contains($0.type)}
+            return standManager.stands.filter { return standManager.selectedTypes.map{$0.rawValue}.contains($0.type)}
         }
     }
     
@@ -31,7 +30,7 @@ struct StandListView: View {
                 } else {
                     List {
                         Section(header:
-                                    BubbleView(standManager: standManager, selectedTypes: $selectedTypes)
+                                    BubbleView(standManager: standManager)
                             .padding(.horizontal, -30)
                             .listRowBackground(Color.clear)
                         ) {
@@ -90,5 +89,5 @@ struct StandListView: View {
 }
 
 #Preview {
-    StandListView(standManager: StandManager(), selectedTypes: .constant([]))
+    StandListView(standManager: StandManager())
 }

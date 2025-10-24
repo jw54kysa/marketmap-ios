@@ -18,15 +18,14 @@ struct MapView: View {
         span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
     )
     
-    @State private var selectedTypes: Set<BoothType> = []
     @State private var selectedStand: Stand? = nil
     @State private var isListViewPresented: Bool = false
     
     var filteredLocations: [Stand] {
-        if selectedTypes.isEmpty {
+        if standManager.selectedTypes.isEmpty {
             return standManager.stands
         } else {
-            return standManager.stands.filter { return selectedTypes.map{$0.rawValue}.contains($0.type) }
+            return standManager.stands.filter { return standManager.selectedTypes.map{$0.rawValue}.contains($0.type) }
         }
     }
     
@@ -91,7 +90,7 @@ struct MapView: View {
                             
                             // MARK: Bubble View
                             
-                            BubbleView(standManager: standManager, selectedTypes: $selectedTypes)
+                            BubbleView(standManager: standManager)
                         }
                         
                     }
@@ -132,6 +131,7 @@ struct MapView: View {
                     }
                     .padding(22)
                 }
+                .frame(maxWidth: .infinity)
                 
                 if standManager.isLoading {
                     SnowfallLoadingOverlay()
@@ -144,7 +144,7 @@ struct MapView: View {
             }
             // ListView
             .sheet(isPresented: $isListViewPresented) {
-                StandListView(standManager: standManager, selectedTypes: $selectedTypes)
+                StandListView(standManager: standManager)
                     .presentationDetents([.medium, .large])
             }
         }

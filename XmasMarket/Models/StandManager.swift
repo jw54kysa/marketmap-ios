@@ -14,6 +14,29 @@ class StandManager: ObservableObject {
     @Published var stands: [Stand] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    
+    // Filter Manager
+    @Published var availableTypes: Set<BoothType> = []
+    @Published var availableOffers: Set<Offer> = []
+    
+    @Published var selectedTypes: Set<BoothType> = []
+    @Published var selectedOffers: Set<Offer> = []
+    
+    func toggleSelection(ofType type: BoothType) {
+        if selectedTypes.contains(type) {
+            selectedTypes.remove(type)
+        } else {
+            selectedTypes.insert(type)
+        }
+    }
+    
+    func toggleSelection(ofOffer offer: Offer) {
+        if selectedOffers.contains(offer) {
+            selectedOffers.remove(offer)
+        } else {
+            selectedOffers.insert(offer)
+        }
+    }
 
     private let cacheFileName = "stands.json"
     
@@ -24,6 +47,7 @@ class StandManager: ObservableObject {
         if InitManager.shared.selectedMarket != nil {
             loadFromCache()
             fetchStands()
+            updateFilterManager()
         }
         
         marketSelectedNotification = NotificationCenter.default
@@ -69,8 +93,12 @@ class StandManager: ObservableObject {
         do {
             let data = try Data(contentsOf: cacheURL)
             let cachedStands = try JSONDecoder().decode([Stand].self, from: data)
-            self.stands = cachedStands.filter { $0.name == InitManager.shared.selectedMarket!.self }
-            print("💾 loaded from cached")
+            if let selectedMarket = InitManager.shared.selectedMarket {
+                self.stands = cachedStands.filter { $0.event == selectedMarket }
+            } else {
+                self.stands = cachedStands
+            }
+            print("💾 loaded from cache: \(stands.count)")
         } catch {
             print("Failed to load cache: \(error.localizedDescription)")
         }
@@ -95,6 +123,7 @@ class StandManager: ObservableObject {
                 DispatchQueue.main.async {
                     self.errorMessage = "Network error: \(error.localizedDescription)"
                     print("📉❌ fetched network error")
+                    self.loadFromCache()
                 }
                 return
             }
@@ -103,6 +132,7 @@ class StandManager: ObservableObject {
                 DispatchQueue.main.async {
                     self.errorMessage = "No data received"
                     print("📉❌ fetched no data")
+                    self.loadFromCache()
                 }
                 return
             }
@@ -118,21 +148,26 @@ class StandManager: ObservableObject {
                 DispatchQueue.main.async {
                     print(data)
                     self.errorMessage = "Decoding error: \(error.localizedDescription)"
-                    print("📉❌ fetched decoding error: \(error.localizedDescription)")
+                    self.loadFromCache()
                 }
             }
         }.resume()
     }
     
-    // MARK: Types
+    // MARK: Filter Manager
+    
+    func updateFilterManager() {
+        availableTypes = getAllTypes()
+        availableOffers = getAllOffers()
+    }
     
     /// return all Types
-    func getAllTypes() -> [BoothType] {
-        let counts = Dictionary(grouping: stands.map(\.boothType), by: { $0 })
-            .mapValues { $0.count }
-        
-        return counts
-            .sorted { $0.value > $1.value }
-            .map { $0.key }
+    func getAllTypes() -> Set<BoothType> {
+        return Set(stands.map(\.boothType))
+    }
+    
+    /// return all Types
+    func getAllOffers() -> Set<Offer> {
+        return Set(stands.flatMap(\.offers))
     }
 }
