@@ -17,10 +17,31 @@ struct FilterSheet: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                ScrollView {
+            
+            ScrollView {
+                VStack(spacing: 20) {
+                    if !standManager.selectedTypes.isEmpty {
+                        HStack {
+                            Text("Ausgewählte Filter:")
+                                .font(.callout)
+                            Spacer()
+                        }
+                        
+                        LazyVGrid(columns: adaptiveColumns, spacing: 16) {
+                            ForEach(Array(standManager.selectedTypes), id: \.self) { type in
+                                FilterBubble(type: type,
+                                             isSelected: standManager.selectedTypes.contains(type),
+                                             onTap: {
+                                    withAnimation(.easeInOut) {
+                                        standManager.toggleSelection(ofType: type)
+                                    }
+                                })
+                            }
+                        }
+                    }
+                    
                     HStack {
-                        Text("Stände")
+                        Text("Buden")
                             .font(.title3)
                             .bold()
                         Spacer()
@@ -31,11 +52,12 @@ struct FilterSheet: View {
                             FilterBubble(type: type,
                                          isSelected: standManager.selectedTypes.contains(type),
                                          onTap: {
-                                standManager.toggleSelection(ofType: type)
+                                withAnimation(.easeInOut) {
+                                    standManager.toggleSelection(ofType: type)
+                                }
                             })
                         }
                     }
-                    
                     
                     Divider()
                     HStack {
@@ -51,20 +73,22 @@ struct FilterSheet: View {
                                               isSelected: standManager.selectedOffers.contains(offer),
                                               onTap: {
                                 standManager.toggleSelection(ofOffer: offer)
-                            }
-                            )
+                            })
                         }
                     }
+                    
+                    Text("Ausgewählte Buden: \(standManager.filteredLocations.count)")
+                        .font(.callout)
+                    
+                    Button(action: {
+                        InitManager.shared.selectedMarket = nil
+                        NotificationCenter.default.post(name: .selectedMarketNil, object: nil)
+                        dismiss()
+                    }, label: {
+                        Text("Einen anderen Markt besuchen ->")
+                    })
                 }
                 .padding()
-                
-                Button(action: {
-                    InitManager.shared.selectedMarket = nil
-                    NotificationCenter.default.post(name: .selectedMarketNil, object: nil)
-                    dismiss()
-                }, label: {
-                    Text("Einen anderen Markt besuchen ->")
-                })
             }
             .navigationTitle("Filter")
             .toolbar {

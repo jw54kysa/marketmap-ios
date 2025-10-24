@@ -12,14 +12,6 @@ struct StandListView: View {
     @ObservedObject var standManager: StandManager
     @State private var selectedStand: Stand? = nil
     
-    var filteredLocations: [Stand] {
-        if standManager.selectedTypes.isEmpty {
-            return standManager.stands
-        } else {
-            return standManager.stands.filter { return standManager.selectedTypes.map{$0.rawValue}.contains($0.type)}
-        }
-    }
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -34,14 +26,14 @@ struct StandListView: View {
                             .padding(.horizontal, -30)
                             .listRowBackground(Color.clear)
                         ) {
-                            ForEach(filteredLocations) { stand in
+                            ForEach(standManager.filteredLocations) { stand in
                                 HStack(spacing: 10) {
-                                    Text(stand.boothType.icon)
+                                    Text(stand.type?.icon ?? "")
                                         .font(.title)
                                     VStack(alignment: .leading) {
                                         Text(stand.name)
                                             .font(.headline)
-                                        Text(stand.boothType.displayName)
+                                        Text(stand.type?.name ?? "")
                                             .font(.subheadline)
                                     }
                                     Spacer()
@@ -76,7 +68,7 @@ struct StandListView: View {
                     }
                 }
             }
-            .navigationTitle("Stände")
+            .navigationTitle("Buden")
             .navigationBarTitleDisplayMode(.automatic)
             
             // MARK: SHEET

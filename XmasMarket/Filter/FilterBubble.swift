@@ -50,7 +50,7 @@ struct BubbleView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     Text(" ")
-                    ForEach(sortedBoothTypes) { type in
+                    ForEach(standManager.sortedBoothTypes) { type in
                         FilterBubble(type: type, isSelected: standManager.selectedTypes.contains(type)) {
                             withAnimation(.easeInOut) {
                                 standManager.toggleSelection(ofType: type)
@@ -72,18 +72,6 @@ struct BubbleView: View {
             FilterSheet(standManager: standManager)
         }
     }
-    
-    private var sortedBoothTypes: [BoothType] {
-        standManager.getAllTypes().sorted {
-            let isFirstSelected = standManager.selectedTypes.contains($0)
-            let isSecondSelected = standManager.selectedTypes.contains($1)
-            
-            if isFirstSelected == isSecondSelected {
-                return $0.rawValue < $1.rawValue
-            }
-            return isFirstSelected && !isSecondSelected
-        }
-    }
 }
 
 struct FilterBubble: View {
@@ -93,20 +81,21 @@ struct FilterBubble: View {
     
     var body: some View {
         Group {
-            Text(type.icon + type.displayName)
+            Text((type.icon ?? "") + " " + type.name)
                 .font(.caption)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
                 .background(
                     Capsule()
-                        .fill(type.color.opacity(isSelected ? 0.3 : 0.1))
+                        .fill(type.getColor().opacity(isSelected ? 0.5 : 0.3))
                         .overlay(
                             Capsule()
-                                .stroke(type.color.opacity(isSelected ? 0.9 : 0.4), lineWidth: 2)
+                                .stroke(type.getColor().opacity(isSelected ? 0.9 : 0.4), lineWidth: 2)
                         )
                 )
-                .foregroundColor(isSelected ? type.color : .gray)
+                .foregroundColor(.primary)
         }
+        .padding(1)
         .onTapGesture { onTap() }
     }
 }
@@ -138,5 +127,9 @@ struct FilterBubbleOffer: View {
 
 #Preview {
     @Previewable @State var selectedTypes: Set<BoothType> = []
-    BubbleView(standManager: StandManager())
+
+    let standManager = StandManager()
+    InitManager.shared.selectedMarket = "25_lpz_wm"
+    
+    return BubbleView(standManager: standManager)
 }

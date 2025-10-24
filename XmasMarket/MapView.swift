@@ -21,14 +21,6 @@ struct MapView: View {
     @State private var selectedStand: Stand? = nil
     @State private var isListViewPresented: Bool = false
     
-    var filteredLocations: [Stand] {
-        if standManager.selectedTypes.isEmpty {
-            return standManager.stands
-        } else {
-            return standManager.stands.filter { return standManager.selectedTypes.map{$0.rawValue}.contains($0.type) }
-        }
-    }
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -37,7 +29,7 @@ struct MapView: View {
                 
                 Map(coordinateRegion: $region,
                     showsUserLocation: true,
-                    annotationItems: filteredLocations
+                    annotationItems: standManager.filteredLocations
                 ) { stand in
                     MapAnnotation(coordinate: stand.coordinate) {
                         VStack(spacing: 4) {
@@ -52,7 +44,7 @@ struct MapView: View {
                                     region.span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
                                 }
                             }) {
-                                Text(stand.boothType.icon)
+                                Text(stand.type?.icon ?? "")
                                     .font(.title)
                                     .shadow(radius: 3)
                             }

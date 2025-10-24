@@ -34,7 +34,7 @@ struct Stand: Codable, Identifiable, Equatable, Hashable {
     let section: String?
     let name: String
     let icon: String?
-    let type: String?
+    let type: BoothType?
     let info: String?
     let offers: [Offer]
     let open_time: String?
@@ -49,13 +49,6 @@ struct Stand: Codable, Identifiable, Equatable, Hashable {
             return .init(latitude: 0, longitude: 0)
         }
         return CLLocationCoordinate2D(latitude: lat, longitude: lng)
-    }
-    
-    var boothType: BoothType {
-        guard let type else {
-            return .unknown
-        }
-        return BoothType(rawValue: type)
     }
     
     var imageURL: URL? {
@@ -73,7 +66,7 @@ let defaultStand = Stand(
     section: "1",
     name: "Default Leipzig Stand",
     icon: "🍷",
-    type: "wine",
+    type: BoothType(id: 1, name: "Wein"),
     info: "This is a default stand located in the middle of Leipzig.",
     offers: [Offer(id: 0, name: "Wein", price: 5.5), Offer(id: 1, name: "Rotwein", price: 6.5)],
     open_time: "12:00",

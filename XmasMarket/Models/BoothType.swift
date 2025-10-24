@@ -11,61 +11,48 @@ struct InitType {
     let count: Int
 }
 
-enum BoothType: String, CaseIterable, Identifiable {
-    case wine
-    case food
-    case wool
-    case wood
-    case entertainment
-    case unknown
+struct BoothType: Codable, Identifiable, Equatable, Hashable {
+    var id: Int
+    var name: String
+    var icon: String?
+    var color: String?
     
-    var id: String { self.rawValue }
-    
-    init(rawValue: String) {
-        switch rawValue.lowercased() {
-        case "wine": self = .wine
-        case "food": self = .food
-        case "wool": self = .wool
-        case "wood": self = .wood
-        case "entertainment": self = .entertainment
-        default: self = .unknown
-        }
+    func getColor() -> Color {
+        guard let color else { return .black }
+        return Color(hex: color)
     }
-    
-    var displayName: String {
-        switch self {
-        case .wine: return "Wein"
-        case .food: return "Essen"
-        case .wool: return "Wolle"
-        case .wood: return "Holz"
-        case .entertainment: return "Unterhaltung"
-        case .unknown: return "Unbekannt"
-        }
-    }
-    
-    var icon: String {
-        switch self {
-        case .wine: return "🍷"
-        case .food: return "🥙"
-        case .wool: return "🐏"
-        case .wood: return "🪵"
-        case .entertainment: return "🎡"
-        case .unknown: return "❓"
-        }
-    }
-    
-    var color: Color {
-        switch self {
-        case .wine: return .red
-        case .food: return .orange
-        case .wool: return .white
-        case .wood: return .brown
-        case .entertainment: return .purple
-        case .unknown: return .gray
-        }
-    }
-    
-    static var allCasesBut: [BoothType] {
-            return Self.allCases.filter { $0 != .unknown }
-        }
 }
+
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3:
+            (a, r, g, b) = (255, (int >> 8) * 17,
+                            (int >> 4 & 0xF) * 17,
+                            (int & 0xF) * 17)
+        case 6:
+            (a, r, g, b) = (255, int >> 16,
+                            int >> 8 & 0xFF,
+                            int & 0xFF)
+        case 8:
+            (a, r, g, b) = (int >> 24,
+                            int >> 16 & 0xFF,
+                            int >> 8 & 0xFF,
+                            int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(
+            .sRGB,
+            red: Double(r) / 255,
+            green: Double(g) / 255,
+            blue: Double(b) / 255,
+            opacity: Double(a) / 255
+        )
+    }
+}
+

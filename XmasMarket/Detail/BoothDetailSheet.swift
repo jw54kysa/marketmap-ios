@@ -45,9 +45,10 @@ struct BoothDetailSheet: View {
                     // Extra info
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
-                            Text(stand.boothType.icon + " " + stand.boothType.displayName)
-                                .font(.custom("Modak", size: 30, relativeTo: .title))
-                            
+                            if let icon = stand.type?.icon, let name = stand.type?.name {
+                                Text(icon + " " + name)
+                                    .font(.custom("Modak", size: 30, relativeTo: .title))
+                            }
                             Spacer()
                             
                             HStack(alignment: .top) {

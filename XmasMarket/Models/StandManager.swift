@@ -16,8 +16,8 @@ class StandManager: ObservableObject {
     @Published var errorMessage: String?
     
     // Filter Manager
-    @Published var availableTypes: Set<BoothType> = []
-    @Published var availableOffers: Set<Offer> = []
+    @Published var availableTypes: [BoothType] = []
+    @Published var availableOffers: [Offer] = []
     
     @Published var selectedTypes: Set<BoothType> = []
     @Published var selectedOffers: Set<Offer> = []
@@ -35,6 +35,26 @@ class StandManager: ObservableObject {
             selectedOffers.remove(offer)
         } else {
             selectedOffers.insert(offer)
+        }
+    }
+    
+    var sortedBoothTypes: [BoothType] {
+        availableTypes.sorted { lhs, rhs in
+            let isFirstSelected = selectedTypes.contains(lhs)
+            let isSecondSelected = selectedTypes.contains(rhs)
+            
+            if isFirstSelected == isSecondSelected {
+                return lhs.name < rhs.name
+            }
+            return isFirstSelected && !isSecondSelected
+        }
+    }
+    
+    var filteredLocations: [Stand] {
+        if selectedTypes.isEmpty {
+            return stands
+        } else {
+            return stands.filter { return selectedTypes.compactMap{ $0 }.contains($0.type) }
         }
     }
 
@@ -162,12 +182,12 @@ class StandManager: ObservableObject {
     }
     
     /// return all Types
-    func getAllTypes() -> Set<BoothType> {
-        return Set(stands.map(\.boothType))
+    func getAllTypes() -> [BoothType] {
+        return Array(stands.compactMap(\.type))
     }
     
     /// return all Types
-    func getAllOffers() -> Set<Offer> {
-        return Set(stands.flatMap(\.offers))
+    func getAllOffers() -> [Offer] {
+        return Array(stands.flatMap(\.offers))
     }
 }
