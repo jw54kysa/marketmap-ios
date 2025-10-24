@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct FilterSheet: View {
+    @Environment(\.dismiss) private var dismiss
     
     @ObservedObject var standManager: StandManager
     
@@ -16,9 +17,8 @@ struct FilterSheet: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack {
-                    
+            VStack {
+                ScrollView {
                     HStack {
                         Text("Stände")
                             .font(.title3)
@@ -57,6 +57,14 @@ struct FilterSheet: View {
                     }
                 }
                 .padding()
+                
+                Button(action: {
+                    InitManager.shared.selectedMarket = nil
+                    NotificationCenter.default.post(name: .selectedMarketNil, object: nil)
+                    dismiss()
+                }, label: {
+                    Text("Einen anderen Markt besuchen ->")
+                })
             }
             .navigationTitle("Filter")
             .toolbar {
