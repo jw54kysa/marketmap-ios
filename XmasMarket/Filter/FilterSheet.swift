@@ -21,7 +21,8 @@ struct FilterSheet: View {
                     
                     HStack {
                         Text("Stände")
-                            .font(.headline)
+                            .font(.title3)
+                            .bold()
                         Spacer()
                     }
                     
@@ -39,7 +40,8 @@ struct FilterSheet: View {
                     Divider()
                     HStack {
                         Text("Angebote")
-                            .font(.headline)
+                            .font(.title3)
+                            .bold()
                         Spacer()
                     }
                     
@@ -55,7 +57,18 @@ struct FilterSheet: View {
                     }
                 }
                 .padding()
-            }.navigationTitle("Filter")
+            }
+            .navigationTitle("Filter")
+            .toolbar {
+                ToolbarItem(placement: .destructiveAction) {
+                    Button(action: {
+                        standManager.selectedTypes.removeAll()
+                        standManager.selectedOffers.removeAll()
+                    }, label: {
+                        Image(systemName: "trash")
+                    })
+                }
+            }
         }
     }
 }

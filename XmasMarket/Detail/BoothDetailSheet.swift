@@ -88,7 +88,8 @@ struct BoothDetailSheet: View {
                     // Angebot
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Angebot")
-                            .font(.custom("Modak", size: 30, relativeTo: .title))
+                            .font(.title3)
+                            .bold()
                         if !stand.offers.isEmpty {
                             ForEach(stand.offers.prefix(5)) { offer in
                                 Text(" - \(offer.name): \(offer.price, specifier: "%.2f €")")
@@ -99,9 +100,10 @@ struct BoothDetailSheet: View {
                     
                     Divider()
                     
-                    VStack(alignment: .leading, spacing: -10) {
+                    VStack(alignment: .leading, spacing: 10) {
                         Text("Bewertung")
-                            .font(.custom("Modak", size: 30, relativeTo: .title))
+                            .font(.title3)
+                            .bold()
                         Text(ratingManager.currentRating == nil ? "Gib jetzt eine Bewertung für den Stand ab.": "Du hast diesen Stand bereits bewertet.")
                             .font(.headline)
                             .lineLimit(2)
@@ -122,7 +124,8 @@ struct BoothDetailSheet: View {
                     
                     VStack(alignment: .leading, spacing: -10) {
                         Text("Richtung")
-                            .font(.custom("Modak", size: 30, relativeTo: .title))
+                            .font(.title3)
+                            .bold()
                         HStack {
                             Spacer()
                             CompassView(locationManager: LocationManager(),
